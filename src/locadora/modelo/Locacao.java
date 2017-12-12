@@ -3,7 +3,7 @@ package locadora.modelo;
 /**
  * Locacao
  */
-public class Locacao implements Modelo {
+public class Locacao implements Modelo, Comparable<Locacao>{
 
 	private Cliente cliente;
 	private Filme filme;
@@ -31,5 +31,10 @@ public class Locacao implements Modelo {
 				filme.equals(((Locacao) arg0).getFilme());
 		}
 		return false;
+	}
+
+	@Override
+	public int compareTo(Locacao arg0) {
+		return cliente.compareTo(arg0.cliente);
 	}
 }

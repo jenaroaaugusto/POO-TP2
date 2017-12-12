@@ -27,7 +27,7 @@ public class Cliente implements Modelo, Comparable<Cliente>{
     @Override
     public boolean equals(Object arg0) {
         if(arg0 instanceof Cliente){
-            return cpf.equals(((Cliente) arg0).getCpf());
+            return cpf.equals(((Cliente) arg0).cpf);
         }
         return false;
     }
