@@ -1,13 +1,15 @@
 package locadora;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import locadora.controle.Escritor;
 import locadora.modelo.*;
 
 /**
  * Database
  */
-public class Database {
+public class Database implements Serializable {
 
     private static Database instance = null;
 
@@ -18,25 +20,25 @@ public class Database {
         return instance;
     }
 
-    private Set<Cliente> clientes;
-    private Set<Filme> filmes;
-    private Set<Locacao> locacoes;
+    private List<Cliente> clientes;
+    private List<Filme> filmes;
+    private List<Locacao> locacoes;
 
     public Database() {
-        clientes = new TreeSet<>();
-        filmes = new TreeSet<>();
-        locacoes = new TreeSet<>();
+        clientes = new ArrayList<>();
+        filmes = new ArrayList<>();
+        locacoes = new ArrayList<>();
     }
 
-    public Set<Cliente> getClientes() {
+    public List<Cliente> getClientes() {
         return clientes;
     }
 
-    public Set<Filme> getFilmes() {
+    public List<Filme> getFilmes() {
         return filmes;
     }
 
-    public Set<Locacao> getLocacoes() {
+    public List<Locacao> getLocacoes() {
         return locacoes;
     }
 
@@ -80,5 +82,14 @@ public class Database {
     public boolean remover(Locacao locacao) {
         locacao.getFilme().setAlugado(false);
         return locacoes.remove(locacao);
+    }
+
+    public void salvarDatabase(){
+        Escritor.getInstance().salvarObjeto(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Database";
     }
 }
