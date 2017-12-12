@@ -4,6 +4,7 @@ import locadora.controle.ClienteControle;
 import locadora.controle.Controle;
 import locadora.modelo.Cliente;
 import locadora.modelo.Modelo;
+import locadora.visao.ClienteVisao;
 import locadora.visao.Visao;
 
 /**
@@ -23,6 +24,6 @@ public class FabricaCliente extends Fabrica {
 
 	@Override
 	public Visao criaVisao() {
-		return null;
+		return new ClienteVisao();
     }   
 }
