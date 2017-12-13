@@ -7,9 +7,11 @@ import locadora.modelo.Cliente;
 public class TabelaCliente extends AbstractTableModel {
 
 	/**
-	 * 
+	 * Tebela reponsável pela exibição dos dados de cada cliente
 	 */
 	private static final long serialVersionUID = -5809871876547904178L;
+	/*Exibe a lista de clientes, os nomes de cada coluna que separa eles
+	 * o vetor de Class é responsável por exibir cada dado no seu lugar*/
 	private List<Cliente> clientes;
     private String[] colunas = { "Nome", "CPF" };
     private Class[] classes = { String.class, String.class };
@@ -32,6 +34,7 @@ public class TabelaCliente extends AbstractTableModel {
         return classes[i];
     }
 
+    /*seta os valores na tabela de clientes*/
     @Override
     public void setValueAt(Object data, int i, int j) {
         switch (j) {

@@ -5,8 +5,13 @@ import javax.swing.table.AbstractTableModel;
 import locadora.modelo.Filme;
 
 public class TabelaFilme extends AbstractTableModel {
-
+	
+	/**
+	 * Tebela reponsável pela exibição dos dados de cada Filme
+	 */
 	private static final long serialVersionUID = 5060657298656557784L;
+	/*Exibe a lista de filmes, os nomes de cada coluna que separa eles
+	 * o vetor de Class é responsável por exibir cada dado no seu lugar*/
 	private List<Filme> filmes;
     private String[] colunas = { "Nome", "Disponível" };
     private Class[] classes = { String.class, String.class };

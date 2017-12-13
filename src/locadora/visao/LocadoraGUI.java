@@ -14,10 +14,6 @@ import javax.swing.filechooser.FileFilter;
 import locadora.Database;
 import locadora.controle.ArquivoManager;
 
-/**
- *
- * @author maycon
- */
 public class LocadoraGUI extends javax.swing.JFrame {
 
     /**
