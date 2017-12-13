@@ -17,14 +17,16 @@ public class ClienteControle implements Controle {
         fabrica = (FabricaCliente) Fabrica.getFabrica("cliente");
     }
 
-    public boolean adicionarCliente(String nome, String cpf){
+    public void adicionarCliente(String nome, String cpf){
 
         Cliente cliente = (Cliente) fabrica.criaModelo();
 
         cliente.setCpf(cpf);
         cliente.setNome(nome);
 
-        return Database.getInstance().adicionar(cliente);
+        if(!Database.getInstance().getClientes().contains(cliente)){
+            Database.getInstance().getClientes().add(cliente);
+        }
     }
 
     public void editarCliente(Cliente cliente, String nome){
@@ -34,6 +36,6 @@ public class ClienteControle implements Controle {
 
     public boolean removerCliente(Cliente cliente){
 
-        return Database.getInstance().remover(cliente);
+        return Database.getInstance().getClientes().remove(cliente);
     }
 }

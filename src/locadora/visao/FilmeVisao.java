@@ -6,24 +6,25 @@
 package locadora.visao;
 
 import javax.swing.JOptionPane;
-
 import locadora.Database;
 import locadora.Fabrica;
-import locadora.controle.ClienteControle;
-import locadora.tabelas.TabelaCliente;
+import locadora.controle.FilmeControle;
+import locadora.tabelas.TabelaFilme;
 
 /**
  *
  * @author maycon
  */
-public class ClienteVisao extends javax.swing.JPanel implements Visao{
+public class FilmeVisao extends javax.swing.JPanel {
 
-    private TabelaCliente modeloTabela;
-    private ClienteControle controle;
-
-    public ClienteVisao() {
-        modeloTabela = new TabelaCliente(Database.getInstance().getClientes());
-        controle = (ClienteControle) Fabrica.getFabrica("cliente").criaControle();
+    private TabelaFilme modeloTabela;
+	private FilmeControle controle;
+    /**
+     * Creates new form FilmeVisao
+     */
+    public FilmeVisao() {
+        modeloTabela = new TabelaFilme(Database.getInstance().getFilmes());
+        controle = (FilmeControle) Fabrica.getFabrica("filme").criaControle();
         initComponents();
         addDialog.pack();
         addDialog.setLocationRelativeTo(null);
@@ -41,16 +42,12 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
 
         addDialog = new javax.swing.JDialog();
         addNomeField = new javax.swing.JTextField();
-        addCPFField = new javax.swing.JTextField();
         addNomeLabel = new javax.swing.JLabel();
-        addCPFLabel = new javax.swing.JLabel();
         addConfirmButton = new javax.swing.JButton();
         addCancelButton = new javax.swing.JButton();
         editDialog = new javax.swing.JDialog();
         editNomeField = new javax.swing.JTextField();
-        editCPFField = new javax.swing.JTextField();
         editNomeLabel = new javax.swing.JLabel();
-        editCPFLabel = new javax.swing.JLabel();
         editConfirmButton = new javax.swing.JButton();
         editCancelButton = new javax.swing.JButton();
         pane = new javax.swing.JScrollPane();
@@ -60,13 +57,11 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
         editButton = new javax.swing.JButton();
 
         addDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addDialog.setTitle("Novo Cliente");
+        addDialog.setTitle("Novo Filme");
         addDialog.setAlwaysOnTop(true);
         addDialog.setResizable(false);
 
         addNomeLabel.setText("Nome:");
-
-        addCPFLabel.setText("CPF:");
 
         addConfirmButton.setText("Confirmar");
         addConfirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -90,17 +85,13 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
                 .addContainerGap()
                 .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addDialogLayout.createSequentialGroup()
-                        .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addCPFLabel)
-                            .addComponent(addNomeLabel))
+                        .addComponent(addNomeLabel)
                         .addGap(18, 18, 18)
-                        .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addNomeField)
-                            .addComponent(addCPFField)))
+                        .addComponent(addNomeField, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addDialogLayout.createSequentialGroup()
-                        .addGap(0, 185, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(addConfirmButton)
-                        .addGap(35, 35, 35)
+                        .addGap(38, 38, 38)
                         .addComponent(addCancelButton)))
                 .addContainerGap())
         );
@@ -111,29 +102,19 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
                 .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addNomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addNomeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addCPFField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addCPFLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addConfirmButton)
-                    .addComponent(addCancelButton))
+                    .addComponent(addCancelButton)
+                    .addComponent(addConfirmButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        addDialog.getAccessibleContext().setAccessibleParent(addButton);
-
         editDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        editDialog.setTitle("Editar Cliente");
+        editDialog.setTitle("Editar Filme");
         editDialog.setAlwaysOnTop(true);
         editDialog.setResizable(false);
 
-        editCPFField.setEditable(false);
-
         editNomeLabel.setText("Nome:");
-
-        editCPFLabel.setText("CPF:");
 
         editConfirmButton.setText("Confirmar");
         editConfirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -157,17 +138,13 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
                 .addContainerGap()
                 .addGroup(editDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(editDialogLayout.createSequentialGroup()
-                        .addGroup(editDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editCPFLabel)
-                            .addComponent(editNomeLabel))
+                        .addComponent(editNomeLabel)
                         .addGap(18, 18, 18)
-                        .addGroup(editDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(editNomeField)
-                            .addComponent(editCPFField)))
+                        .addComponent(editNomeField, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editDialogLayout.createSequentialGroup()
-                        .addGap(0, 185, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(editConfirmButton)
-                        .addGap(35, 35, 35)
+                        .addGap(36, 36, 36)
                         .addComponent(editCancelButton)))
                 .addContainerGap())
         );
@@ -178,18 +155,12 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
                 .addGroup(editDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editNomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editNomeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(editDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editCPFField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editCPFLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editConfirmButton)
-                    .addComponent(editCancelButton))
+                    .addComponent(editCancelButton)
+                    .addComponent(editConfirmButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        editDialog.getAccessibleContext().setAccessibleParent(removeButton);
 
         Table.setAutoCreateRowSorter(true);
         Table.setModel(modeloTabela);
@@ -227,7 +198,7 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                        .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(removeButton, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -249,15 +220,14 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         setEnabled(false);
         addNomeField.setText("");
-        addCPFField.setText("");
         addDialog.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         try{
-            controle.removerCliente(modeloTabela.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow())));
+            controle.removerFilme(modeloTabela.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow())));
         }catch (IndexOutOfBoundsException e){
-            JOptionPane.showMessageDialog(this, "Selecione um cliente", "Não é possível remover", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um filme", "Não é possível remover", JOptionPane.ERROR_MESSAGE);
         }
         modeloTabela.fireTableDataChanged();
     }//GEN-LAST:event_removeButtonActionPerformed
@@ -266,16 +236,15 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
         setEnabled(false);
         try{
             editNomeField.setText((String) Table.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow()), 0));
-            editCPFField.setText((String) Table.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow()), 1));
             editDialog.setVisible(true);
         }catch (IndexOutOfBoundsException e){
-            JOptionPane.showMessageDialog(this, "Selecione um cliente", "Não é possível editar", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um filme", "Não é possível editar", JOptionPane.ERROR_MESSAGE);
             setEnabled(true);
         }
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void addConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConfirmButtonActionPerformed
-        controle.adicionarCliente(addNomeField.getText(), addCPFField.getText());
+        controle.adicionarFilme(addNomeField.getText());
         modeloTabela.fireTableDataChanged();
         addDialog.dispose();
         setEnabled(true);
@@ -287,7 +256,7 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
     }//GEN-LAST:event_addCancelButtonActionPerformed
 
     private void editConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editConfirmButtonActionPerformed
-        controle.editarCliente(modeloTabela.getValueAt(Table.getSelectedRow()), editNomeField.getText());
+        controle.editarFilme(modeloTabela.getValueAt(Table.getSelectedRow()), editNomeField.getText());
         modeloTabela.fireTableDataChanged();
         editDialog.dispose();
         setEnabled(true);
@@ -302,16 +271,12 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table;
     private javax.swing.JButton addButton;
-    private javax.swing.JTextField addCPFField;
-    private javax.swing.JLabel addCPFLabel;
     private javax.swing.JButton addCancelButton;
     private javax.swing.JButton addConfirmButton;
     private javax.swing.JDialog addDialog;
     private javax.swing.JTextField addNomeField;
     private javax.swing.JLabel addNomeLabel;
     private javax.swing.JButton editButton;
-    private javax.swing.JTextField editCPFField;
-    private javax.swing.JLabel editCPFLabel;
     private javax.swing.JButton editCancelButton;
     private javax.swing.JButton editConfirmButton;
     private javax.swing.JDialog editDialog;

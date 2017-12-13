@@ -5,9 +5,6 @@
  */
 package locadora.visao;
 
-import java.awt.Component;
-import locadora.Fabrica;
-
 /**
  *
  * @author maycon
@@ -19,8 +16,6 @@ public class LocadoraGUI extends javax.swing.JFrame {
      */
     public LocadoraGUI() {
         initComponents();
-        mainPane.add("Clientes", (Component) Fabrica.getFabrica("cliente").criaVisao());
-        pack();
         setLocationRelativeTo(null);
     }
 
@@ -33,8 +28,15 @@ public class LocadoraGUI extends javax.swing.JFrame {
     private void initComponents() {//GEN-BEGIN:initComponents
 
         mainPane = new javax.swing.JTabbedPane();
+        clienteVisao = new locadora.visao.ClienteVisao();
+        filmeVisao = new locadora.visao.FilmeVisao();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Locadora");
+
+        mainPane.addTab("Clientes", clienteVisao);
+        mainPane.addTab("Filmes", filmeVisao);
+
         getContentPane().add(mainPane, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -76,6 +78,8 @@ public class LocadoraGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private locadora.visao.ClienteVisao clienteVisao;
+    private locadora.visao.FilmeVisao filmeVisao;
     private javax.swing.JTabbedPane mainPane;
     // End of variables declaration//GEN-END:variables
 }

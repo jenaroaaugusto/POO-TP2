@@ -1,9 +1,6 @@
 package locadora.controle;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.nio.file.Path;
 
 /**
  * Escritor
@@ -23,27 +20,8 @@ public class Escritor {
 
     }
 
-    public void salvarObjeto(Object obj){
-        
-        ObjectOutputStream os = null;
+    public void salvar(Object obj, Path path){
 
-        try {
-			os = new ObjectOutputStream(new FileOutputStream(obj.toString() + ".dat"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-        }finally{
-            if(os != null) {
-                try {
-					os.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            }
-        }
+        
     }
 }
