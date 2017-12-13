@@ -10,6 +10,8 @@ import locadora.modelo.Locacao;
 
 /**
  * TabelaLocacao
+ * Implementa TableModelLister pois sua exibição depende das outras tabelas,
+ * Quando uma das outras mudam seus dados, esta atualiza de acordo
  */
 public class TabelaLocacao extends AbstractTableModel implements TableModelListener{
 

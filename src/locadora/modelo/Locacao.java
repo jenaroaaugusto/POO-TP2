@@ -40,7 +40,7 @@ public class Locacao implements Modelo, Comparable<Locacao>, Serializable{
 		return false;
 	}
 	
-	/*Ordena os clientes*/
+	/*Função para ordenação de locações (ordena do mesmo jeito que clientes) */
 	@Override
 	public int compareTo(Locacao arg0) {
 		return cliente.compareTo(arg0.cliente);

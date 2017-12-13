@@ -5,7 +5,7 @@
     <Container class="javax.swing.JDialog" name="addDialog">
       <Properties>
         <Property name="defaultCloseOperation" type="int" value="2"/>
-        <Property name="title" type="java.lang.String" value="Novo Filme"/>
+        <Property name="title" type="java.lang.String" value="Nova Loca&#xe7;&#xe3;o"/>
         <Property name="alwaysOnTop" type="boolean" value="true"/>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>

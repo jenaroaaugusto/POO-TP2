@@ -35,16 +35,14 @@ public class ArquivoManager {
        
     	/*Foi criado um arquivo para permitir escrever o objeto nele*/
     	oos = new ObjectOutputStream(new FileOutputStream(path.toFile()));
-        System.out.println(obj.hashCode()); //printa o objeto mapeado na memória
         oos.writeObject(obj); //escreve esse objeto 
         oos.close();
     }
     
-    /*Abre o objeto escrito no arquivo e retorna na tela*/
+    /*Abre o objeto escrito no arquivo e o retorna*/
     public Object abrir(Path path) throws IOException, FileNotFoundException, ClassNotFoundException {
         ois = new ObjectInputStream(new FileInputStream(path.toFile()));
         Object obj = ois.readObject();
-        System.out.println(obj.hashCode());
         ois.close();
         return obj;
     }

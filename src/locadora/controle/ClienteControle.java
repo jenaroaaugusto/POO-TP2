@@ -27,19 +27,18 @@ public class ClienteControle implements Controle {
         cliente.setNome(nome);
 
         if(!Database.getInstance().getClientes().contains(cliente)){
-            Database.getInstance().getClientes().add(cliente);
+            Database.getInstance().adicionar(cliente);
         }
     }
 
     /*Edita os dados de um cliente*/
     public void editarCliente(Cliente cliente, String nome){
-
         cliente.setNome(nome);
     }
     
     /*Remove um cliente da instância de banco*/
     public boolean removerCliente(Cliente cliente){
 
-        return Database.getInstance().getClientes().remove(cliente);
+        return Database.getInstance().remover(cliente);
     }
 }

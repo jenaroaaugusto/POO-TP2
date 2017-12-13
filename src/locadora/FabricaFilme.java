@@ -4,6 +4,7 @@ import locadora.controle.Controle;
 import locadora.controle.FilmeControle;
 import locadora.modelo.Filme;
 import locadora.modelo.Modelo;
+import locadora.visao.FilmeVisao;
 import locadora.visao.Visao;
 
 /**
@@ -23,6 +24,6 @@ public class FabricaFilme extends Fabrica {
 
 	@Override
 	public Visao criaVisao() {
-		return null;
+		return new FilmeVisao();
 	}
 }

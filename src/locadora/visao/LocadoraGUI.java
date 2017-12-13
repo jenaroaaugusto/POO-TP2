@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import locadora.Database;
+import locadora.Fabrica;
 import locadora.controle.ArquivoManager;
 
 public class LocadoraGUI extends javax.swing.JFrame {
@@ -45,12 +46,15 @@ public class LocadoraGUI extends javax.swing.JFrame {
         salvarArquivoItem = new javax.swing.JMenuItem();
         abrirArquivoItem = new javax.swing.JMenuItem();
 
+        salvarArquivoChooser.setAcceptAllFileFilterUsed(false);
         salvarArquivoChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         salvarArquivoChooser.setApproveButtonText("Salvar");
         salvarArquivoChooser.setDialogTitle("Salvar Como...");
         salvarArquivoChooser.setFileFilter(new Filtro());
 
+        abrirArquivoChooser.setAcceptAllFileFilterUsed(false);
         abrirArquivoChooser.setApproveButtonText("Abrir");
+        abrirArquivoChooser.setFileFilter(new Filtro());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Locadora");

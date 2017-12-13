@@ -38,6 +38,7 @@ public class Filme implements Modelo, Comparable<Filme>, Serializable {
 		return false;
 	}
 
+	/*Função para ordenação de filmes */
 	@Override
 	public int compareTo(Filme arg0) {
 		return nome.compareToIgnoreCase(arg0.nome);

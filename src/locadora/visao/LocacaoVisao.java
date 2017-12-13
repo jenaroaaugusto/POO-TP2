@@ -52,7 +52,7 @@ public class LocacaoVisao extends javax.swing.JPanel {
         removeButton = new javax.swing.JButton();
 
         addDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addDialog.setTitle("Novo Filme");
+        addDialog.setTitle("Nova Locação");
         addDialog.setAlwaysOnTop(true);
         addDialog.setResizable(false);
 

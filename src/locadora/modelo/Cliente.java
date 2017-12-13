@@ -39,7 +39,7 @@ public class Cliente implements Modelo, Comparable<Cliente>, Serializable{
         return false;
     }
     
-    /*Compara se o nome de um cliente também está cadastrado*/
+    /*Função para ordenação de clientes*/
     @Override
     public int compareTo(Cliente arg0) {
         return nome.compareToIgnoreCase(arg0.getNome());

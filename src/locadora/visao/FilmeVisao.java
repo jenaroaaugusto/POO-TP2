@@ -14,7 +14,7 @@ import locadora.modelo.Filme;
 import locadora.tabelas.TabelaFilme;
 
 
-public class FilmeVisao extends javax.swing.JPanel {
+public class FilmeVisao extends javax.swing.JPanel implements Visao{
 
     protected TabelaFilme modeloTabela;
 	private FilmeControle controle;
@@ -232,13 +232,13 @@ public class FilmeVisao extends javax.swing.JPanel {
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        setEnabled(false);
+        getParent().setEnabled(false);
         try{
             editNomeField.setText((String) table.getValueAt(table.convertRowIndexToModel(table.getSelectedRow()), 0));
             editDialog.setVisible(true);
         }catch (IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(this, "Selecione um filme", "Não é possível editar", JOptionPane.ERROR_MESSAGE);
-            setEnabled(true);
+            getParent().setEnabled(true);
         }
     }//GEN-LAST:event_editButtonActionPerformed
 
@@ -246,24 +246,24 @@ public class FilmeVisao extends javax.swing.JPanel {
         controle.adicionarFilme(addNomeField.getText());
         modeloTabela.fireTableDataChanged();
         addDialog.dispose();
-        setEnabled(true);
+        getParent().setEnabled(true);
     }//GEN-LAST:event_addConfirmButtonActionPerformed
 
     private void addCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCancelButtonActionPerformed
         addDialog.dispose();
-        setEnabled(false);
+        getParent().setEnabled(false);
     }//GEN-LAST:event_addCancelButtonActionPerformed
 
     private void editConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editConfirmButtonActionPerformed
         controle.editarFilme(modeloTabela.getValueAt(table.getSelectedRow()), editNomeField.getText());
         modeloTabela.fireTableDataChanged();
         editDialog.dispose();
-        setEnabled(true);
+        getParent().setEnabled(true);
     }//GEN-LAST:event_editConfirmButtonActionPerformed
 
     private void editCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCancelButtonActionPerformed
         editDialog.dispose();
-        setEnabled(false);
+        getParent().setEnabled(false);
     }//GEN-LAST:event_editCancelButtonActionPerformed
     
     public void update(){

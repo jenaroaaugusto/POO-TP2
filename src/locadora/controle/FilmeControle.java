@@ -27,7 +27,7 @@ public class FilmeControle implements Controle {
         filme.setNome(nome);
 
         if (!Database.getInstance().getFilmes().contains(filme)) {
-            Database.getInstance().getFilmes().add(filme);
+            Database.getInstance().adicionar(filme);
         }
     }
 
@@ -40,6 +40,6 @@ public class FilmeControle implements Controle {
     /*Remove o filme do banco de dados de filmes*/
     public boolean removerFilme(Filme filme) {
 
-        return Database.getInstance().getFilmes().remove(filme);
+        return Database.getInstance().remover(filme);
     }
 }
