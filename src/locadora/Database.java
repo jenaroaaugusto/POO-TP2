@@ -3,7 +3,6 @@ package locadora;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import locadora.controle.Escritor;
 import locadora.modelo.*;
 
 /**
@@ -11,13 +10,18 @@ import locadora.modelo.*;
  */
 public class Database implements Serializable {
 
-    private static Database instance = null;
+	private static final long serialVersionUID = -4112197063571309836L;
+	private static Database instance = null;
 
     public static Database getInstance() {
         if (instance == null) {
             instance = new Database();
         }
         return instance;
+    }
+
+    public static void setInstance(Database db){
+        instance = db;
     }
 
     private List<Cliente> clientes;
@@ -75,21 +79,10 @@ public class Database implements Serializable {
     }
 
     public boolean adicionar(Locacao locacao) {
-        locacao.getFilme().setAlugado(true);
         return locacoes.add(locacao);
     }
 
     public boolean remover(Locacao locacao) {
-        locacao.getFilme().setAlugado(false);
         return locacoes.remove(locacao);
-    }
-
-    public void salvarDatabase(){
-        Escritor.getInstance().salvarObjeto(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Database";
     }
 }
