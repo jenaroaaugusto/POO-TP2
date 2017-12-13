@@ -10,7 +10,8 @@ import locadora.visao.Visao;
 public abstract class Fabrica {
 
     public static Fabrica getFabrica(String fabrica){
-
+    	
+    	/*Seleciona qual fábrica será criada*/
         if(fabrica.equalsIgnoreCase("cliente")){
             return new FabricaCliente();
         }else if(fabrica.equalsIgnoreCase("filme")){
@@ -20,7 +21,8 @@ public abstract class Fabrica {
         }
         return null;
     }
-
+    
+    /*Define as operações em comum entre todas as fábricas*/
     public abstract Modelo criaModelo();
     public abstract Controle criaControle();
     public abstract Visao criaVisao();

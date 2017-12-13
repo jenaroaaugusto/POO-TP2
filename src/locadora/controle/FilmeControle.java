@@ -12,11 +12,14 @@ public class FilmeControle implements Controle {
 
     private FabricaFilme fabrica;
 
+    /*Cria uma instância do tipo Filme em Fábrica*/
     public FilmeControle() {
 
         fabrica = (FabricaFilme) Fabrica.getFabrica("filme");
     }
 
+    /*Cria um novo filme e busca se ele não existe na Database, 
+     * caso não exista, será adicionado*/
     public void adicionarFilme(String nome) {
 
         Filme filme = (Filme) fabrica.criaModelo();
@@ -28,11 +31,13 @@ public class FilmeControle implements Controle {
         }
     }
 
+    /*Editar o nome do filme*/
     public void editarFilme(Filme filme, String nome) {
 
         filme.setNome(nome);
     }
-
+    
+    /*Remove o filme do banco de dados de filmes*/
     public boolean removerFilme(Filme filme) {
 
         return Database.getInstance().getFilmes().remove(filme);

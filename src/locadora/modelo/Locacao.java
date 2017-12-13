@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 public class Locacao implements Modelo, Comparable<Locacao>, Serializable{
 
-	/**
-	 * 
-	 */
+	/*Elabora o padrão de locação*/
 	private static final long serialVersionUID = 5973539541036189689L;
+	/*Cada operação de locação é realizada por um cliente(portanto existirá
+	 * uma ficha dele) e um filme que será alugado*/
 	private Cliente cliente;
 	private Filme filme;
 
@@ -29,7 +29,8 @@ public class Locacao implements Modelo, Comparable<Locacao>, Serializable{
 	public void setFilme(Filme filme) {
 		this.filme = filme;
 	}
-
+	
+	/*retorna a operação de locação, quando um dado cliente consegue locar um filme*/
 	@Override
 	public boolean equals(Object arg0) {
 		if (arg0 instanceof Locacao) {
@@ -38,7 +39,8 @@ public class Locacao implements Modelo, Comparable<Locacao>, Serializable{
 		}
 		return false;
 	}
-
+	
+	/*Ordena os clientes*/
 	@Override
 	public int compareTo(Locacao arg0) {
 		return cliente.compareTo(arg0.cliente);

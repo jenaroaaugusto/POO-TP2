@@ -17,7 +17,8 @@ public class ArquivoManager {
     
     private ObjectOutputStream oos = null;
     private ObjectInputStream ois = null;
-
+    
+    /*Cria apenas uma instância para salvar no arquivo*/
     public static ArquivoManager getInstance(){
         if(instance == null) {
             instance = new ArquivoManager();
@@ -28,14 +29,18 @@ public class ArquivoManager {
     private ArquivoManager(){
 
     }
-
+    
+    /*Escreve no arquivo e exibe os dados nele.*/
     public void salvar(Object obj, Path path) throws FileNotFoundException, IOException{
-        oos = new ObjectOutputStream(new FileOutputStream(path.toFile()));
-        System.out.println(obj.hashCode());
-        oos.writeObject(obj);
+       
+    	/*Foi criado um arquivo para permitir escrever o objeto nele*/
+    	oos = new ObjectOutputStream(new FileOutputStream(path.toFile()));
+        System.out.println(obj.hashCode()); //printa o objeto mapeado na memória
+        oos.writeObject(obj); //escreve esse objeto 
         oos.close();
     }
-
+    
+    /*Abre o objeto escrito no arquivo e retorna na tela*/
     public Object abrir(Path path) throws IOException, FileNotFoundException, ClassNotFoundException {
         ois = new ObjectInputStream(new FileInputStream(path.toFile()));
         Object obj = ois.readObject();

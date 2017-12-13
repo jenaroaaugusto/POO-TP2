@@ -16,7 +16,9 @@ public class LocacaoControle implements Controle {
     public LocacaoControle(){
         fabrica = Fabrica.getFabrica("locacao");
     }
-
+    
+    /*Com os dados do cliente e do filme, relaciona a locação do filme na ficha do cliente
+     * Seta o filme como alugado e adiciona a operação no Database*/
     public boolean adicionarLocacao(Cliente cliente, Filme filme){
         Locacao locacao = (Locacao) fabrica.criaModelo();
         locacao.setCliente(cliente);
@@ -26,6 +28,8 @@ public class LocacaoControle implements Controle {
         return Database.getInstance().adicionar(locacao);
     }
 
+    /*Remove a operação de locação do banco, pra quando o usuário 
+     * realizar a devolução de um filme*/
     public boolean removerLocacao(Locacao locacao){
         locacao.getFilme().setAlugado(false);
         return Database.getInstance().remover(locacao);

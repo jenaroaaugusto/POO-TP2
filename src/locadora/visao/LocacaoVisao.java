@@ -15,10 +15,6 @@ import locadora.modelo.Filme;
 import locadora.modelo.Locacao;
 import locadora.tabelas.TabelaLocacao;
 
-/**
- *
- * @author maycon
- */
 public class LocacaoVisao extends javax.swing.JPanel {
 
     protected TabelaLocacao modeloTabela;

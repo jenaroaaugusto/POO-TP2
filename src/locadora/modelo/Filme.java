@@ -7,10 +7,9 @@ import java.io.Serializable;
  */
 public class Filme implements Modelo, Comparable<Filme>, Serializable {
 
-    /**
-	 * 
-	 */
+	/*Monta a ficha do filme*/
 	private static final long serialVersionUID = 7681136281087677344L;
+	/*Cada filme possui um nome e um estado(alugado ou não)*/
 	private String nome;
 	private boolean alugado;
 
@@ -30,6 +29,7 @@ public class Filme implements Modelo, Comparable<Filme>, Serializable {
 		this.alugado = alugado;
 	}
 
+	/*Confere se o filme em questão já está alugado*/
 	@Override
 	public boolean equals(Object arg0) {
 		if(arg0 instanceof Filme){

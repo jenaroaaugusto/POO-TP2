@@ -13,10 +13,7 @@ import locadora.controle.FilmeControle;
 import locadora.modelo.Filme;
 import locadora.tabelas.TabelaFilme;
 
-/**
- *
- * @author maycon
- */
+
 public class FilmeVisao extends javax.swing.JPanel {
 
     protected TabelaFilme modeloTabela;

@@ -14,10 +14,7 @@ import locadora.controle.ClienteControle;
 import locadora.modelo.Cliente;
 import locadora.tabelas.TabelaCliente;
 
-/**
- *
- * @author maycon
- */
+
 public class ClienteVisao extends javax.swing.JPanel implements Visao {
 
     protected TabelaCliente modeloTabela;

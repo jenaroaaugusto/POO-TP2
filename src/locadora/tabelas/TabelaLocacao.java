@@ -13,7 +13,13 @@ import locadora.modelo.Locacao;
  */
 public class TabelaLocacao extends AbstractTableModel implements TableModelListener{
 
+	/**
+	 * Tebela reponsável pela exibição da operação de uma locação
+	 */
     private static final long serialVersionUID = 5060657298656557784L;
+    /*Exibe a lista de operações de locação, os nomes de cada coluna que separa 
+     * um cliente e o filme que este alugou o vetor de Class é responsável por 
+     * exibir cada dado no seu lugar*/
 	private List<Locacao> locacoes;
     private String[] colunas = { "Nome do Cliente", "Nome do Filme" };
     private Class[] classes = { String.class, String.class };
