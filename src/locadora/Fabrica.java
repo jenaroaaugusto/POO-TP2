@@ -22,7 +22,7 @@ public abstract class Fabrica {
         return null;
     }
     
-    /*Realiza as operações em comum entre todas as fábricas*/
+    /*Define as operações em comum entre todas as fábricas*/
     public abstract Modelo criaModelo();
     public abstract Controle criaControle();
     public abstract Visao criaVisao();
