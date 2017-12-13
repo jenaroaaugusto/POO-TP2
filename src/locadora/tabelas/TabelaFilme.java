@@ -6,11 +6,16 @@ import locadora.modelo.Filme;
 
 public class TabelaFilme extends AbstractTableModel {
 
-    private List<Filme> filmes;
+	private static final long serialVersionUID = 5060657298656557784L;
+	private List<Filme> filmes;
     private String[] colunas = { "Nome", "Disponível" };
     private Class[] classes = { String.class, String.class };
 
     public TabelaFilme(List<Filme> filmes){
+        this.filmes = filmes;
+    }
+
+    public void setFilmes(List<Filme> filmes) {
         this.filmes = filmes;
     }
 

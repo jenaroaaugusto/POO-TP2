@@ -1,11 +1,17 @@
 package locadora.modelo;
 
+import java.io.Serializable;
+
 /**
  * Cliente
  */
-public class Cliente implements Modelo, Comparable<Cliente>{
+public class Cliente implements Modelo, Comparable<Cliente>, Serializable{
 
-    private String nome;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4460507951606447160L;
+	private String nome;
     private String cpf;
 
 	public String getNome() {
@@ -35,5 +41,10 @@ public class Cliente implements Modelo, Comparable<Cliente>{
     @Override
     public int compareTo(Cliente arg0) {
         return nome.compareToIgnoreCase(arg0.getNome());
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 }

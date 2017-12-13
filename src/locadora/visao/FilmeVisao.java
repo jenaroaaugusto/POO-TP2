@@ -5,10 +5,12 @@
  */
 package locadora.visao;
 
+import java.util.List;
 import javax.swing.JOptionPane;
 import locadora.Database;
 import locadora.Fabrica;
 import locadora.controle.FilmeControle;
+import locadora.modelo.Filme;
 import locadora.tabelas.TabelaFilme;
 
 /**
@@ -17,7 +19,7 @@ import locadora.tabelas.TabelaFilme;
  */
 public class FilmeVisao extends javax.swing.JPanel {
 
-    private TabelaFilme modeloTabela;
+    protected TabelaFilme modeloTabela;
 	private FilmeControle controle;
     /**
      * Creates new form FilmeVisao
@@ -51,7 +53,7 @@ public class FilmeVisao extends javax.swing.JPanel {
         editConfirmButton = new javax.swing.JButton();
         editCancelButton = new javax.swing.JButton();
         pane = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
@@ -162,9 +164,9 @@ public class FilmeVisao extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Table.setAutoCreateRowSorter(true);
-        Table.setModel(modeloTabela);
-        pane.setViewportView(Table);
+        table.setAutoCreateRowSorter(true);
+        table.setModel(modeloTabela);
+        pane.setViewportView(table);
 
         addButton.setText("Adicionar");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +227,7 @@ public class FilmeVisao extends javax.swing.JPanel {
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         try{
-            controle.removerFilme(modeloTabela.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow())));
+            controle.removerFilme(modeloTabela.getValueAt(table.convertRowIndexToModel(table.getSelectedRow())));
         }catch (IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(this, "Selecione um filme", "Não é possível remover", JOptionPane.ERROR_MESSAGE);
         }
@@ -235,7 +237,7 @@ public class FilmeVisao extends javax.swing.JPanel {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         setEnabled(false);
         try{
-            editNomeField.setText((String) Table.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow()), 0));
+            editNomeField.setText((String) table.getValueAt(table.convertRowIndexToModel(table.getSelectedRow()), 0));
             editDialog.setVisible(true);
         }catch (IndexOutOfBoundsException e){
             JOptionPane.showMessageDialog(this, "Selecione um filme", "Não é possível editar", JOptionPane.ERROR_MESSAGE);
@@ -256,7 +258,7 @@ public class FilmeVisao extends javax.swing.JPanel {
     }//GEN-LAST:event_addCancelButtonActionPerformed
 
     private void editConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editConfirmButtonActionPerformed
-        controle.editarFilme(modeloTabela.getValueAt(Table.getSelectedRow()), editNomeField.getText());
+        controle.editarFilme(modeloTabela.getValueAt(table.getSelectedRow()), editNomeField.getText());
         modeloTabela.fireTableDataChanged();
         editDialog.dispose();
         setEnabled(true);
@@ -266,10 +268,17 @@ public class FilmeVisao extends javax.swing.JPanel {
         editDialog.dispose();
         setEnabled(false);
     }//GEN-LAST:event_editCancelButtonActionPerformed
+    
+    public void update(){
+        modeloTabela.fireTableDataChanged();
+    }
 
+    public void update(List<Filme> filmes){
+        modeloTabela.setFilmes(filmes);
+        modeloTabela.fireTableDataChanged();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table;
     private javax.swing.JButton addButton;
     private javax.swing.JButton addCancelButton;
     private javax.swing.JButton addConfirmButton;
@@ -284,5 +293,6 @@ public class FilmeVisao extends javax.swing.JPanel {
     private javax.swing.JLabel editNomeLabel;
     private javax.swing.JScrollPane pane;
     private javax.swing.JButton removeButton;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

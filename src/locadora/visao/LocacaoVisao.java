@@ -6,11 +6,12 @@
 package locadora.visao;
 
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import locadora.Database;
 import locadora.Fabrica;
 import locadora.controle.LocacaoControle;
+import locadora.modelo.Cliente;
+import locadora.modelo.Filme;
 import locadora.modelo.Locacao;
 import locadora.tabelas.TabelaLocacao;
 
@@ -20,8 +21,9 @@ import locadora.tabelas.TabelaLocacao;
  */
 public class LocacaoVisao extends javax.swing.JPanel {
 
-    private TabelaLocacao modeloTabela;
+    protected TabelaLocacao modeloTabela;
     private LocacaoControle controle;
+
     /**
      * Creates new form LocacaoVisao
      */
@@ -45,11 +47,11 @@ public class LocacaoVisao extends javax.swing.JPanel {
         clienteLabel = new javax.swing.JLabel();
         addConfirmButton = new javax.swing.JButton();
         addCancelButton = new javax.swing.JButton();
-        ClienteBox = new javax.swing.JComboBox<>();
-        FilmeBox = new javax.swing.JComboBox<>();
+        clienteBox = new javax.swing.JComboBox<>();
+        filmeBox = new javax.swing.JComboBox<>();
         filmeLabel = new javax.swing.JLabel();
         pane = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
 
@@ -74,8 +76,6 @@ public class LocacaoVisao extends javax.swing.JPanel {
             }
         });
 
-        ClienteBox.setModel(new DefaultComboBoxModel(Database.getInstance().getClientes().toArray()));
-
         filmeLabel.setText("Filme:");
 
         javax.swing.GroupLayout addDialogLayout = new javax.swing.GroupLayout(addDialog.getContentPane());
@@ -91,8 +91,8 @@ public class LocacaoVisao extends javax.swing.JPanel {
                             .addComponent(filmeLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FilmeBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ClienteBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(filmeBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clienteBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addDialogLayout.createSequentialGroup()
                         .addGap(0, 138, Short.MAX_VALUE)
                         .addComponent(addConfirmButton)
@@ -106,10 +106,10 @@ public class LocacaoVisao extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clienteLabel)
-                    .addComponent(ClienteBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clienteBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FilmeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filmeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filmeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -118,9 +118,9 @@ public class LocacaoVisao extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Table.setAutoCreateRowSorter(true);
-        Table.setModel(modeloTabela);
-        pane.setViewportView(Table);
+        table.setAutoCreateRowSorter(true);
+        table.setModel(modeloTabela);
+        pane.setViewportView(table);
 
         addButton.setText("Adicionar");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -165,21 +165,32 @@ public class LocacaoVisao extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         setEnabled(false);
+        carregarClienteBox(Database.getInstance().getClientes());
+        carregarFilmeBox(Database.getInstance().getFilmes());
         addDialog.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        try{
-            controle.removerLocacao(modeloTabela.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow())));
-        }catch (IndexOutOfBoundsException e){
-            JOptionPane.showMessageDialog(this, "Selecione um filme", "Não é possível remover", JOptionPane.ERROR_MESSAGE);
+        try {
+            controle.removerLocacao(modeloTabela.getValueAt(table.convertRowIndexToModel(table.getSelectedRow())));
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Selecione um filme", "Não é possível remover",
+                    JOptionPane.ERROR_MESSAGE);
         }
         modeloTabela.fireTableDataChanged();
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void addConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConfirmButtonActionPerformed
-        
+        Cliente cliente = Database.getInstance().getClientes().get(clienteBox.getSelectedIndex());
+
+        for(Filme filme : Database.getInstance().getFilmes()){
+            if(filme.getNome().equals(filmeBox.getSelectedItem())){
+                controle.adicionarLocacao(cliente, filme);
+                break;
+            }
+        }
         modeloTabela.fireTableDataChanged();
+        
         addDialog.dispose();
         setEnabled(true);
     }//GEN-LAST:event_addConfirmButtonActionPerformed
@@ -188,27 +199,43 @@ public class LocacaoVisao extends javax.swing.JPanel {
         addDialog.dispose();
         setEnabled(false);
     }//GEN-LAST:event_addCancelButtonActionPerformed
-    
-    public void update(){
+
+    public void update() {
         modeloTabela.fireTableDataChanged();
     }
 
-    public void update(List<Locacao> locacoes){
+    public void update(List<Locacao> locacoes) {
         modeloTabela.setLocacoes(locacoes);
         modeloTabela.fireTableDataChanged();
     }
 
+    public void carregarClienteBox(List<Cliente> clientes){
+        clienteBox.removeAllItems();
+        for(Cliente cliente : clientes) {
+            clienteBox.addItem(cliente.getNome());
+        }
+    }
+
+    public void carregarFilmeBox(List<Filme> filmes){
+        filmeBox.removeAllItems();
+        for(Filme filme : filmes){
+            if(!filme.isAlugado()){
+                filmeBox.addItem(filme.getNome());
+            }
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ClienteBox;
-    private javax.swing.JComboBox<String> FilmeBox;
-    private javax.swing.JTable Table;
     private javax.swing.JButton addButton;
     private javax.swing.JButton addCancelButton;
     private javax.swing.JButton addConfirmButton;
     private javax.swing.JDialog addDialog;
+    private javax.swing.JComboBox<String> clienteBox;
     private javax.swing.JLabel clienteLabel;
+    private javax.swing.JComboBox<String> filmeBox;
     private javax.swing.JLabel filmeLabel;
     private javax.swing.JScrollPane pane;
     private javax.swing.JButton removeButton;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

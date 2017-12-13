@@ -25,6 +25,8 @@ public class LocadoraGUI extends javax.swing.JFrame {
      */
     public LocadoraGUI() {
         initComponents();
+        clienteVisao.modeloTabela.addTableModelListener(locacaoVisao.modeloTabela);
+        filmeVisao.modeloTabela.addTableModelListener(locacaoVisao.modeloTabela);
         setLocationRelativeTo(null);
     }
 
@@ -41,7 +43,7 @@ public class LocadoraGUI extends javax.swing.JFrame {
         mainPane = new javax.swing.JTabbedPane();
         clienteVisao = new locadora.visao.ClienteVisao();
         filmeVisao = new locadora.visao.FilmeVisao();
-        locacaoVisao1 = new locadora.visao.LocacaoVisao();
+        locacaoVisao = new locadora.visao.LocacaoVisao();
         menuBar = new javax.swing.JMenuBar();
         arquivoMenu = new javax.swing.JMenu();
         salvarArquivoItem = new javax.swing.JMenuItem();
@@ -59,7 +61,7 @@ public class LocadoraGUI extends javax.swing.JFrame {
 
         mainPane.addTab("Clientes", clienteVisao);
         mainPane.addTab("Filmes", filmeVisao);
-        mainPane.addTab("Locações", locacaoVisao1);
+        mainPane.addTab("Locações", locacaoVisao);
 
         getContentPane().add(mainPane, java.awt.BorderLayout.CENTER);
 
@@ -98,8 +100,6 @@ public class LocadoraGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(salvarArquivoChooser, ex.getMessage(), "Ocorreu um erro", JOptionPane.ERROR_MESSAGE);
                 
             }
-            clienteVisao.update();
-            filmeVisao.update();
         }
     }//GEN-LAST:event_salvarArquivoItemActionPerformed
 
@@ -111,6 +111,7 @@ public class LocadoraGUI extends javax.swing.JFrame {
                 Database.setInstance((Database) ArquivoManager.getInstance().abrir(path));
                 clienteVisao.update(Database.getInstance().getClientes());
                 filmeVisao.update(Database.getInstance().getFilmes());
+                locacaoVisao.update(Database.getInstance().getLocacoes());
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(salvarArquivoChooser, ex.getMessage(), "Ocorreu um erro", JOptionPane.ERROR_MESSAGE);
@@ -159,7 +160,7 @@ public class LocadoraGUI extends javax.swing.JFrame {
     private javax.swing.JMenu arquivoMenu;
     private locadora.visao.ClienteVisao clienteVisao;
     private locadora.visao.FilmeVisao filmeVisao;
-    private locadora.visao.LocacaoVisao locacaoVisao1;
+    private locadora.visao.LocacaoVisao locacaoVisao;
     private javax.swing.JTabbedPane mainPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JFileChooser salvarArquivoChooser;

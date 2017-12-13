@@ -1,11 +1,17 @@
 package locadora.modelo;
 
+import java.io.Serializable;
+
 /**
  * Filme
  */
-public class Filme implements Modelo, Comparable<Filme> {
+public class Filme implements Modelo, Comparable<Filme>, Serializable {
 
-    private String nome;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7681136281087677344L;
+	private String nome;
 	private boolean alugado;
 
 	public String getNome() {

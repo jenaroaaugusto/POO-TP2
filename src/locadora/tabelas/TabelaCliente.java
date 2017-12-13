@@ -6,11 +6,19 @@ import locadora.modelo.Cliente;
 
 public class TabelaCliente extends AbstractTableModel {
 
-    private List<Cliente> clientes;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5809871876547904178L;
+	private List<Cliente> clientes;
     private String[] colunas = { "Nome", "CPF" };
     private Class[] classes = { String.class, String.class };
 
     public TabelaCliente(List<Cliente> clientes){
+        this.clientes = clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
     }
 

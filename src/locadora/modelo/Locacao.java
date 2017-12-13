@@ -1,10 +1,16 @@
 package locadora.modelo;
 
+import java.io.Serializable;
+
 /**
  * Locacao
  */
-public class Locacao implements Modelo, Comparable<Locacao>{
+public class Locacao implements Modelo, Comparable<Locacao>, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5973539541036189689L;
 	private Cliente cliente;
 	private Filme filme;
 

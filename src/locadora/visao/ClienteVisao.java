@@ -5,20 +5,22 @@
  */
 package locadora.visao;
 
+import java.util.List;
 import javax.swing.JOptionPane;
 
 import locadora.Database;
 import locadora.Fabrica;
 import locadora.controle.ClienteControle;
+import locadora.modelo.Cliente;
 import locadora.tabelas.TabelaCliente;
 
 /**
  *
  * @author maycon
  */
-public class ClienteVisao extends javax.swing.JPanel implements Visao{
+public class ClienteVisao extends javax.swing.JPanel implements Visao {
 
-    private TabelaCliente modeloTabela;
+    protected TabelaCliente modeloTabela;
     private ClienteControle controle;
 
     public ClienteVisao() {
@@ -54,7 +56,7 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
         editConfirmButton = new javax.swing.JButton();
         editCancelButton = new javax.swing.JButton();
         pane = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
@@ -191,9 +193,9 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
 
         editDialog.getAccessibleContext().setAccessibleParent(removeButton);
 
-        Table.setAutoCreateRowSorter(true);
-        Table.setModel(modeloTabela);
-        pane.setViewportView(Table);
+        table.setAutoCreateRowSorter(true);
+        table.setModel(modeloTabela);
+        pane.setViewportView(table);
 
         addButton.setText("Adicionar");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -254,22 +256,24 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        try{
-            controle.removerCliente(modeloTabela.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow())));
-        }catch (IndexOutOfBoundsException e){
-            JOptionPane.showMessageDialog(this, "Selecione um cliente", "Não é possível remover", JOptionPane.ERROR_MESSAGE);
+        try {
+            controle.removerCliente(modeloTabela.getValueAt(table.convertRowIndexToModel(table.getSelectedRow())));
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente", "Não é possível remover",
+                    JOptionPane.ERROR_MESSAGE);
         }
         modeloTabela.fireTableDataChanged();
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         setEnabled(false);
-        try{
-            editNomeField.setText((String) Table.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow()), 0));
-            editCPFField.setText((String) Table.getValueAt(Table.convertRowIndexToModel(Table.getSelectedRow()), 1));
+        try {
+            editNomeField.setText((String) table.getValueAt(table.convertRowIndexToModel(table.getSelectedRow()), 0));
+            editCPFField.setText((String) table.getValueAt(table.convertRowIndexToModel(table.getSelectedRow()), 1));
             editDialog.setVisible(true);
-        }catch (IndexOutOfBoundsException e){
-            JOptionPane.showMessageDialog(this, "Selecione um cliente", "Não é possível editar", JOptionPane.ERROR_MESSAGE);
+        } catch (IndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente", "Não é possível editar",
+                    JOptionPane.ERROR_MESSAGE);
             setEnabled(true);
         }
     }//GEN-LAST:event_editButtonActionPerformed
@@ -287,7 +291,7 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
     }//GEN-LAST:event_addCancelButtonActionPerformed
 
     private void editConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editConfirmButtonActionPerformed
-        controle.editarCliente(modeloTabela.getValueAt(Table.getSelectedRow()), editNomeField.getText());
+        controle.editarCliente(modeloTabela.getValueAt(table.getSelectedRow()), editNomeField.getText());
         modeloTabela.fireTableDataChanged();
         editDialog.dispose();
         setEnabled(true);
@@ -298,9 +302,16 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
         setEnabled(false);
     }//GEN-LAST:event_editCancelButtonActionPerformed
 
+    public void update() {
+        modeloTabela.fireTableDataChanged();
+    }
+
+    public void update(List<Cliente> clientes){
+        modeloTabela.setClientes(clientes);
+        modeloTabela.fireTableDataChanged();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table;
     private javax.swing.JButton addButton;
     private javax.swing.JTextField addCPFField;
     private javax.swing.JLabel addCPFLabel;
@@ -319,5 +330,6 @@ public class ClienteVisao extends javax.swing.JPanel implements Visao{
     private javax.swing.JLabel editNomeLabel;
     private javax.swing.JScrollPane pane;
     private javax.swing.JButton removeButton;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
